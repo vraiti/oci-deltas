@@ -1,0 +1,5 @@
+FROM fedora:latest
+
+RUN mkdir /data
+
+RUN dd if=/dev/urandom of=/data/random.bin bs=1M count=1024 status=progress;
