@@ -1,5 +1,11 @@
 FROM fedora:latest
 
+RUN dnf install -y python
+
 RUN mkdir /data
 
-RUN dd if=/dev/urandom of=/data/random.bin bs=1M count=1024 status=progress;
+RUN python3 <<EOS
+with open("/data/foo","w") as fp:
+	for _ in range(100_000_000):
+		print("foo",file=fp)
+EOS

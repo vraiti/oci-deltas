@@ -14,20 +14,19 @@ if [ -z $GO_DIR ]; then
 	mkdir -p ~/go
 fi
 
-V1=$repo:random-v1
-V2=$repo:random-v2
+V1=$repo:foo-v1
+V2=$repo:foo-v2
+V3=$repo:foo-v3
 
 skopeo=$GO_DIR/skopeo/bin/skopeo
-
-# generate container delta
-# syntax is generate-delta [TO] [FROM]
-$skopeo generate-delta --fallback-config-type --fallback-layer-type docker://$V2 docker://$V1
 
 # test delta-based pull
 podman rmi $V1
 podman rmi $V2
+podman rmi $V3
 
 $skopeo copy --debug docker://$V1 containers-storage:$V1
+$skopeo copy --debug docker://$V3 containers-storage:$V3
 $skopeo copy --debug docker://$V2 containers-storage:$V2
 
 echo

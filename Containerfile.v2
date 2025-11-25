@@ -1,9 +1,0 @@
-ARG BASE_IMAGE
-FROM ${BASE_IMAGE}
-
-RUN <<EOF
-
-pos=$((RANDOM % 1073741824))
-dd of=/data/random.bin if=/dev/urandom bs=1 seek=$pos count=1 conv=notrunc status=none
-
-EOF

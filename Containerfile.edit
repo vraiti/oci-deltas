@@ -1,0 +1,12 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+
+ARG LINE
+
+RUN <<EOF
+
+offst=$((${LINE} * 4))
+
+echo -n "b" | dd of=/data/foo bs=1 seek=$offst count=1 conv=notrunc status=none
+
+EOF

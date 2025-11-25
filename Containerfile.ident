@@ -1,2 +1,0 @@
-ARG REF
-FROM ${REF}
